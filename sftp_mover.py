@@ -1,6 +1,7 @@
 import paramiko
 import socket
 from datetime import datetime 
+import os
 
 class iLikeTo():
     def __init__(self, hostname, username, keyFile, port):
@@ -17,7 +18,7 @@ class iLikeTo():
             param_transport = paramiko.Transport(sock)
             param_connect = param_transport.connect(
                 username=self.username,
-                pkey=paramiko.PKey.from_private_key(self.keyfile)
+                pkey=paramiko.PKey.from_private_key(os.open(self.keyfile))
             )
             param_channel = param_transport.open_channel("session")
             param_channel.invoke_subsystem("sftp")
