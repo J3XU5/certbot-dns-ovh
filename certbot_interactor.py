@@ -10,6 +10,6 @@ class certInt():
                             --dns-ovh \
                             --dns-ovh-credentials ~/creds.ini \
                             --dns-ovh-propagation-seconds 60 \
-                            -d'''+domain 
+                            -d '''+domain 
             , timeout=70)
             print("New cert for "+domain+" created")
