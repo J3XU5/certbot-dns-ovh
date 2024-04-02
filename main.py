@@ -6,7 +6,7 @@ sftp_param = input("Insert sftp parameters : hostname, username, privkey,  port 
 
 certInt.newCert(domains)
 
-sftp_move = iLikeTo("hugoravard.fr", "cert_delivery", sftp_param[2], 50004)
+sftp_move = iLikeTo(sftp_param[0], sftp_param[1], sftp_param[2], sftp_param[3])
 sftp_move.moveIt(domains)
 
 del sftp_move
