@@ -17,7 +17,7 @@ class iLikeTo():
             param_transport = paramiko.Transport(sock)
             param_connect = param_transport.connect(
                 username=self.username,
-                pkey=self.keyfile
+                pkey=paramiko.PKey.from_private_key_file(self.keyfile)
             )
             param_channel = param_transport.open_channel("session")
             param_channel.invoke_subsystem("sftp")
