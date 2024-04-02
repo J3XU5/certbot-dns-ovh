@@ -4,14 +4,9 @@ from sftp_mover import *
 domains = input("Insert domain names (comma separated) : ").split(",") # get domain names to work with
 sftp_param = input("Insert sftp parameters : hostname, username, privkey,  port (comma separated) : ").split(",")
 
-import os
-import getpass
-print("Env thinks the user is [%s]" % (os.getlogin()))
-print("Effective user is [%s]" % (getpass.getuser()))
-
 certInt.newCert(domains)
 
-sftp_move = iLikeTo("hugoravard.fr", "cert_delivery", "/home/"+sftp_param[1]+"/.ssh/id_rsa", 50004)
+sftp_move = iLikeTo("hugoravard.fr", "cert_delivery", sftp_param[2], 50004)
 sftp_move.moveIt(domains)
 
 del sftp_move
