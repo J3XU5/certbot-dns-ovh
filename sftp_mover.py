@@ -10,7 +10,7 @@ class iLikeTo():
         self.username = username
         self.keyfile = keyFile
         self.port = port
-        
+
         try:
             # Create socket
             sock = socket.create_connection((hostname,port))
@@ -18,7 +18,7 @@ class iLikeTo():
             param_transport = paramiko.Transport(sock)
             param_connect = param_transport.connect(
                 username=self.username,
-                pkey=paramiko.PKey.from_private_key_file(self.keyfile)
+                pkey=paramiko.PKey.from_private_key_file(filename=self.keyfile)
             )
             param_channel = param_transport.open_channel("session")
             param_channel.invoke_subsystem("sftp")
