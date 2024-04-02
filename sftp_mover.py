@@ -1,4 +1,5 @@
-import pysftp
+import paramiko
+import socket
 from datetime import datetime 
 
 class iLikeTo():
@@ -10,13 +11,19 @@ class iLikeTo():
         self.port = port
         
         try:
+            # Create socket
+            sock = socket.create_connection((hostname,port))
             # Get the sftp connection object
-            self.connection = pysftp.Connection(
-                host=self.hostname,
+            param_transport = paramiko.Transport(sock)
+            param_connect = param_transport.connect(
                 username=self.username,
-                private_key=self.keyfile,
-                port=self.port,
+                pkey=self.keyfile
             )
+            param_channel = param_transport.open_channel("session")
+            param_channel.invoke_subsystem("sftp")
+
+            self.connection = paramiko.SFTPClient(param_channel)
+
 
         except Exception as err:
             raise Exception(err)
@@ -35,8 +42,9 @@ class iLikeTo():
                 date = datetime.today().strftime('%Y-%m-%d')
 
                 # Download file from SFTP
-                self.connection.put_r("/etc/letsencrypt/live/"+domain+"/privkey.pem", "certs/"+date+"privkey.pem")
-                self.connection.put_r("/etc/letsencrypt/live/"+domain+"/fullchain.pem", "certs/"+date+"/fullchain.pem")
+                self.connection.mkdir("certs/"+date+"/")
+                self.connection.put("etc/letsencrypt/live/"+domain+"/privkey.pem", "certs/"+date+"/")
+                self.connection.put("etc/letsencrypt/live/"+domain+"/fullchain.pem", "certs/"+date+"/")
                 print("upload completed")
 
             except Exception as err:
