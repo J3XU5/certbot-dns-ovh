@@ -18,7 +18,7 @@ class iLikeTo():
             param_transport = paramiko.Transport(sock)
             param_connect = param_transport.connect(
                 username=self.username,
-                pkey=paramiko.PKey.from_private_key(os.open(self.keyfile,os.O_RDONLY))
+                pkey=paramiko.PKey.from_private_key_file(self.keyfile)
             )
             param_channel = param_transport.open_channel("session")
             param_channel.invoke_subsystem("sftp")
@@ -28,11 +28,10 @@ class iLikeTo():
 
         except Exception as err:
             raise Exception(err)
-        finally:
-            print(f"Connected to {self.hostname} as {self.username}.")
 
     def __del__(self):
-        self.connection.close()
+        if self.connect != None:
+            self.connection.close()
 
     def moveIt(self, domains: list):
         for domain in domains:
