@@ -43,8 +43,8 @@ class iLikeTo():
 
                 # Download file from SFTP
                 self.connection.mkdir("certs/"+date+"/")
-                self.connection.put("etc/letsencrypt/live/"+domain+"/privkey.pem", "certs/"+date+"/")
-                self.connection.put("etc/letsencrypt/live/"+domain+"/fullchain.pem", "certs/"+date+"/")
+                self.connection.put("/etc/letsencrypt/live/"+domain+"-"+date+"/privkey.pem", "certs/"+date+"/")
+                self.connection.put("/etc/letsencrypt/live/"+domain+"-"+date+"/fullchain.pem", "certs/"+date+"/")
                 print("upload completed")
 
             except Exception as err:

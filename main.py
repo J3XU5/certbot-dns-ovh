@@ -9,4 +9,4 @@ certInt.newCert(domains)
 sftp_move = iLikeTo(sftp_param[0], sftp_param[1], sftp_param[2], sftp_param[3])
 sftp_move.moveIt(domains)
 
-del sftp_move
+#del sftp_move
