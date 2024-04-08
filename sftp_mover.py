@@ -37,7 +37,7 @@ class iLikeTo():
         for domain in domains:
             try:
                 print(
-                    f"uploading to {self.hostname} as {self.username}"
+                    f"uploading {domain} certs to {self.hostname} as {self.username}"
                 )
                 date = datetime.today().strftime('%Y-%m-%d')
 
