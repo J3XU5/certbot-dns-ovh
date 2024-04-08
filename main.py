@@ -7,7 +7,12 @@ from sftp_mover import *
 param = open("./param",'r').readlines()
 
 domains = param[1].split(",")
+for domain in domains:
+    domain.rsplit("\n") #to remove \n on last domain name
+
 sftp_param = param[2].split(",")
+for sftp_parameter in sftp_param:
+    sftp_parameter.rsplit("\n") #to remove \n on last param name
 
 certInt.newCert(domains)
 
