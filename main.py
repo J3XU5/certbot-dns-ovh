@@ -8,6 +8,7 @@ param = open("param",'r').readlines()
 
 domains = param[1].split(",")
 sftp_param = param[2].split(",")
+
 certInt.newCert(domains)
 
 sftp_move = iLikeTo(sftp_param[0], sftp_param[1], sftp_param[2], sftp_param[3])
