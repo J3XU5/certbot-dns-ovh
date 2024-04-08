@@ -4,15 +4,11 @@ from sftp_mover import *
 #domains = input("Insert domain names (comma separated) : ").split(",") # get domain names to work with
 #sftp_param = input("Insert sftp parameters : hostname, username, privkey, port (comma separated) : ").split(",")
 
-param = open("./param",'r').readlines()
+param = open("./param",'r').read().splitlines()
 
 domains = param[1].split(",")
-for domain in domains:
-    domain.rsplit("\n") #to remove \n on last domain name
 
 sftp_param = param[2].split(",")
-for sftp_parameter in sftp_param:
-    sftp_parameter.rsplit("\n") #to remove \n on last param name
 
 certInt.newCert(domains)
 
