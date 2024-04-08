@@ -1,7 +1,6 @@
 import paramiko
 import socket
-from datetime import datetime 
-import os
+from datetime import datetime
 
 class iLikeTo():
     def __init__(self, hostname, username, keyFile, port):
@@ -29,10 +28,6 @@ class iLikeTo():
         except Exception as err:
             raise Exception(err)
 
-    """     def __del__(self):
-        if self.connection != None:
-            self.connection.close() """
-
     def moveIt(self, domains: list):
         for domain in domains:
             try:
@@ -41,7 +36,7 @@ class iLikeTo():
                 )
                 date = datetime.today().strftime('%Y-%m-%d')
 
-                # Download file from SFTP
+                # Upload file to SFTP
                 try:
                     self.connection.chdir("/certs/"+domain+"-"+date+"/")
                 except IOError:
@@ -50,12 +45,9 @@ class iLikeTo():
                 
                 self.connection.put("/etc/letsencrypt/live/"+domain+"-"+date+"/privkey.pem", "privkey.pem")
                 self.connection.put("/etc/letsencrypt/live/"+domain+"-"+date+"/fullchain.pem", "fullchain.pem")
-                #self.connection.chdir("~")
+
                 print("upload completed")
 
             except Exception as err:
-                raise Exception(err)
-    
-
-    
+                raise Exception(err)    
         
