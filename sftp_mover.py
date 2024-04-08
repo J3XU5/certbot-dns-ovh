@@ -44,7 +44,7 @@ class iLikeTo():
                 # Download file from SFTP
                 try:
                     self.connection.chdir("certs/"+domain+"-"+date+"/")
-                except IOError:
+                except FileNotFoundError:
                     self.connection.mkdir("certs/"+domain+"-"+date+"/")
                     self.connection.chdir("certs/"+domain+"-"+date+"/")
                 
