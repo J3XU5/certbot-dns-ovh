@@ -50,7 +50,7 @@ class iLikeTo():
                 
                 self.connection.put("/etc/letsencrypt/live/"+domain+"-"+date+"/privkey.pem", "privkey.pem")
                 self.connection.put("/etc/letsencrypt/live/"+domain+"-"+date+"/fullchain.pem", "fullchain.pem")
-                self.connection.chdir("..")
+                self.connection.chdir("~")
                 print("upload completed")
 
             except Exception as err:
