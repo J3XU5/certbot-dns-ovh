@@ -42,9 +42,13 @@ class iLikeTo():
                 date = datetime.today().strftime('%Y-%m-%d')
 
                 # Download file from SFTP
-                self.connection.mkdir("certs/"+date+"/")
-                self.connection.put("/etc/letsencrypt/live/"+domain+"-"+date+"/privkey.pem", "certs/"+date+"/")
-                self.connection.put("/etc/letsencrypt/live/"+domain+"-"+date+"/fullchain.pem", "certs/"+date+"/")
+                try:
+                    self.connection.chdir("certs/"+date+"/")
+                except IOError:
+                    self.connection.mkdir("certs/"+date+"/")
+                
+                self.connection.put("/etc/letsencrypt/live/"+domain+"-"+date+"/privkey.pem", "privkey.pem")
+                self.connection.put("/etc/letsencrypt/live/"+domain+"-"+date+"/fullchain.pem", "fullchain.pem")
                 print("upload completed")
 
             except Exception as err:
