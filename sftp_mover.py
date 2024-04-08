@@ -43,14 +43,14 @@ class iLikeTo():
 
                 # Download file from SFTP
                 try:
-                    self.connection.chdir("certs/"+domain+"-"+date+"/")
-                except FileNotFoundError:
-                    self.connection.mkdir("certs/"+domain+"-"+date+"/")
-                    self.connection.chdir("certs/"+domain+"-"+date+"/")
+                    self.connection.chdir("/certs/"+domain+"-"+date+"/")
+                except IOError:
+                    self.connection.mkdir("/certs/"+domain+"-"+date+"/")
+                    self.connection.chdir("/certs/"+domain+"-"+date+"/")
                 
                 self.connection.put("/etc/letsencrypt/live/"+domain+"-"+date+"/privkey.pem", "privkey.pem")
                 self.connection.put("/etc/letsencrypt/live/"+domain+"-"+date+"/fullchain.pem", "fullchain.pem")
-                self.connection.chdir("~")
+                #self.connection.chdir("~")
                 print("upload completed")
 
             except Exception as err:
