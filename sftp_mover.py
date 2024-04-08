@@ -46,6 +46,7 @@ class iLikeTo():
                     self.connection.chdir("certs/"+date+"/")
                 except IOError:
                     self.connection.mkdir("certs/"+date+"/")
+                    self.connection.chdir("certs/"+date+"/")
                 
                 self.connection.put("/etc/letsencrypt/live/"+domain+"-"+date+"/privkey.pem", "privkey.pem")
                 self.connection.put("/etc/letsencrypt/live/"+domain+"-"+date+"/fullchain.pem", "fullchain.pem")
