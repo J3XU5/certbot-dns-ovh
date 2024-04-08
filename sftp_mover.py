@@ -30,7 +30,7 @@ class iLikeTo():
             raise Exception(err)
 
     def __del__(self):
-        if self.connect != None:
+        if self.connection != None:
             self.connection.close()
 
     def moveIt(self, domains: list):
