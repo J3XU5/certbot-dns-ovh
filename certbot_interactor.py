@@ -1,5 +1,5 @@
 import subprocess
-import datetime
+from datetime import datetime
 
 class certInt():
     def __init__(self) -> None:
