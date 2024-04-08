@@ -29,9 +29,9 @@ class iLikeTo():
         except Exception as err:
             raise Exception(err)
 
-    def __del__(self):
+    """     def __del__(self):
         if self.connection != None:
-            self.connection.close()
+            self.connection.close() """
 
     def moveIt(self, domains: list):
         for domain in domains:
@@ -43,13 +43,14 @@ class iLikeTo():
 
                 # Download file from SFTP
                 try:
-                    self.connection.chdir("certs/"+date+"/")
+                    self.connection.chdir("certs/"+domain+"-"+date+"/")
                 except IOError:
-                    self.connection.mkdir("certs/"+date+"/")
-                    self.connection.chdir("certs/"+date+"/")
+                    self.connection.mkdir("certs/"+domain+"-"+date+"/")
+                    self.connection.chdir("certs/"+domain+"-"+date+"/")
                 
                 self.connection.put("/etc/letsencrypt/live/"+domain+"-"+date+"/privkey.pem", "privkey.pem")
                 self.connection.put("/etc/letsencrypt/live/"+domain+"-"+date+"/fullchain.pem", "fullchain.pem")
+                self.connection.chdir("..")
                 print("upload completed")
 
             except Exception as err:
